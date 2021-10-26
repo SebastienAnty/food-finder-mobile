@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { View, Text, ScrollView } from "react-native";
+import { Fab, QuestionIcon } from "native-base";
+import { RestaurantContext } from "../App";
 import RestaurantCard from "./RestaurantCard";
 import styles from "../styles";
 
-export default function Home() {
-    const [restaurants, setRestaurants] = useState();
+export default function Home({ navigation }) {
+    const {restaurants, setRestaurants} = useContext(RestaurantContext);
     useEffect(() => {
         fetch("https://bocacode-intranet-api.web.app/restaurants")
-        .then(response => response.json())
-        .then(setRestaurants)
-        .catch(alert)
+            .then(response => response.json())
+            .then(setRestaurants)
+            .catch(alert)
     }, [])
     return(
     <View style={styles.container}>
@@ -19,7 +21,7 @@ export default function Home() {
                 {restaurants.map(rest => <RestaurantCard key={rest.id} rest={rest} />)}
                 </ScrollView>
         }
-        <Text></Text>
+        <Fab colorScheme="indigo" onPress={() => navigation.navigate("Random")} icon={<QuestionIcon />} />
     </View>
     )
 }
