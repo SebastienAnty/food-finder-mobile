@@ -31,6 +31,10 @@ const styles = StyleSheet.create({
         fontSize: 16,
         padding: 4
     },
+    detailsImage: {
+        width: "100%",
+        height: 260,
+    }
   });
 
   export default styles
