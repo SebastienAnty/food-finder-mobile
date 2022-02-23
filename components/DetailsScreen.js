@@ -6,7 +6,7 @@ import styles from "../styles";
 export default function DetailsScreen() {
     const { selectedRest, restaurants, setRestaurants } = useContext(RestaurantContext);
     const [thisRest, setThisRest] = useState();
-    useEffect(() => {
+    useEffect(() => { 
         if(restaurants && selectedRest) {
         const _thisRest = restaurants.find(r => r.id === selectedRest);
         setThisRest(_thisRest);
