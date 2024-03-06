@@ -6,22 +6,29 @@ import RestaurantCard from "./RestaurantCard";
 import styles from "../styles";
 
 export default function Home({ navigation }) {
-    const {restaurants, setRestaurants} = useContext(RestaurantContext);
-    useEffect(() => {
-        fetch("https://bocacode-intranet-api.web.app/restaurants")
-            .then(response => response.json())
-            .then(setRestaurants)
-            .catch(alert)
-    }, [])
-    return(
+  const { restaurants, setRestaurants } = useContext(RestaurantContext);
+  useEffect(() => {
+    fetch("https://bocacode-intranet-api.web.app/restaurants")
+      .then((response) => response.json())
+      .then(setRestaurants)
+      .catch(alert);
+  }, []);
+  return (
     <View style={styles.container}>
-        {! restaurants 
-            ? <Text>Loading...</Text>
-            :   <ScrollView>
-                {restaurants.map(rest => <RestaurantCard key={rest.id} rest={rest} />)}
-                </ScrollView>
-        }
-        <Fab colorScheme="indigo" onPress={() => navigation.navigate("Random")} icon={<QuestionIcon />} />
+      {!restaurants ? (
+        <Text>Loading...</Text>
+      ) : (
+        <ScrollView>
+          {restaurants.map((rest) => (
+            <RestaurantCard key={rest.id} rest={rest} />
+          ))}
+        </ScrollView>
+      )}
+      <Fab
+        colorScheme="indigo"
+        onPress={() => navigation.navigate("Random")}
+        icon={<QuestionIcon />}
+      />
     </View>
-    )
+  );
 }
